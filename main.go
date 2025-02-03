@@ -17,10 +17,16 @@ func main() {
 	log.Print("Starting server...")
 
 	http.HandleFunc("/", handler)
+
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		log.Print("Returning favicon...")
+		http.ServeFile(w, r, "static/favicon.ico")
+	})
+
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, _ *http.Request) {
 	const (
 		xmin, ymin, xmax, ymax = -2, -2, +2, +2
 		width, height          = 1024, 1024
