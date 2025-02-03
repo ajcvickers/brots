@@ -60,7 +60,7 @@ func mandelbrot(z complex128) color.Color {
 	for n := uint8(0); n < iterations; n++ {
 		v = v*v + z
 		if cmplx.Abs(v) > 2 {
-			return color.Gray{255 - contrast*n}
+			return color.RGBA{R: (255 - contrast*n*3) % 255, G: 32 + (contrast * n * 2 % 200), B: (200 - contrast*n) % 255, A: 255}
 		}
 	}
 	return color.Black
